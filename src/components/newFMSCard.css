@@ -1,0 +1,12 @@
+.container {
+    display: flex; 
+    justify-content: center;
+}
+
+.new-fms-card {
+    border: 10px solid teal; 
+}
+
+.card-title {
+    font-weight: bold;
+}

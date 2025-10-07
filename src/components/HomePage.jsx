@@ -1,9 +1,10 @@
 import react from "react";
+import NewFMSCard from "./NewFMSCard";
 
 function HomePage() {
     return (
         <div className="header-div">
-            <h1>This is the Home Page.</h1>
+            <NewFMSCard />
         </div>
     );
 }
