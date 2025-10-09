@@ -1,6 +1,5 @@
-import react from "react";
+import React from "react";
 import NewFMSCard from "./FMSCard/NewFMSCard";
-import FMSScoresheet from "./FMSScoreSheet/FMSScoresheet";
 
 function HomePage() {
     return (
