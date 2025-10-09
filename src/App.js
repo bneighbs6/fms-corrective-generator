@@ -9,6 +9,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/new-fms' element={<FMSScoresheet />} />
       </Routes>
     </Router>
   );
