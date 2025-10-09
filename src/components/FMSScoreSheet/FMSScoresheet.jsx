@@ -1,7 +1,20 @@
 import React from "react";
+import { useState } from "react";
 import { Card, Table, Form, Container } from "react-bootstrap";
+import "./FMSScoresheet.css"
 
 function FMSScoresheet() {
+  const [deepSquat, setDeepSquat] = useState("");
+  const [leftHurdleStep, setLeftHurdleStep] = useState("");
+  const [rightHurdleStep, setRightHurdleStep] = useState("");
+
+const handleDeepSquatChange = (e) => setDeepSquat(e.target.value);
+const handleLeftHurdleStepChange = (e) => setLeftHurdleStep(e.target.value);
+const handleRightHurdleStepChange = (e) => setRightHurdleStep(e.target.value);
+
+console.log("the current value of deep squat is " + deepSquat);
+console.log("The current value of Left hurdle step is " + leftHurdleStep);
+console.log("the current value of Right Hrudle Step is " + rightHurdleStep)
   return (
     <div className="fms-scoresheet">
       <Container>
@@ -25,7 +38,11 @@ function FMSScoresheet() {
                 <tr>
                   <td>Deep Squat</td>
                   <td>
-                    <Form.Control type="number" placeholder="Raw" />
+                    <Form.Control
+                      type="number"
+                      placeholder="Raw"
+                      onChange={handleDeepSquatChange}
+                    />
                   </td>
                   <td>
                     <Form.Control type="number" placeholder="Final" />
@@ -38,8 +55,16 @@ function FMSScoresheet() {
                 <tr>
                   <td>Hurdle Step</td>
                   <td>
-                    <Form.Control type="number" placeholder="Left" />
-                    <Form.Control type="number" placeholder="Right" />
+                    <Form.Control
+                      type="number"
+                      placeholder="Left"
+                      onChange={handleLeftHurdleStepChange}
+                    />
+                    <Form.Control
+                      type="number"
+                      placeholder="Right"
+                      onChange={handleRightHurdleStepChange}
+                    />
                   </td>
                   <td>
                     <Form.Control type="number" placeholder="Final" />
@@ -132,12 +157,14 @@ function FMSScoresheet() {
                     <Form.Control type="text" placeholder="Comments" />
                   </td>
                 </tr>
-                <hr />
                 {/* Total Testing Score */}
                 <tr>
                   <td>Total Screen Score</td>
                   <td>
-                    <Form.Control type="number" placeholder="Final Test Score" />
+                    <Form.Control
+                      type="number"
+                      placeholder="Final Test Score"
+                    />
                   </td>
                 </tr>
                 {/* repeat for other tests */}
