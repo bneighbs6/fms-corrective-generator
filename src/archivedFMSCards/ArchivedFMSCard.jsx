@@ -5,8 +5,8 @@ import { Button, Card, Container } from "react-bootstrap";
 function ArchivedFMSCard() {
     return (
       <div>
-        <Container>
-          <Card>
+        <Container className="archived-fms-container">
+          <Card className="archived-fms-card">
             <Card.Body>
               <Card.Title>Archived FMS Scoresheets</Card.Title>
               <Card.Text>
