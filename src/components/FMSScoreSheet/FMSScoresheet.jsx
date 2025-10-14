@@ -42,47 +42,63 @@ function FMSScoresheet() {
   // Uses the input's "name" attribute as the key to update the matching property in fmsScoresheetData.
   const handleFormChange = (e) => {
     const { name, value } = e.target;
+    console.log(e);
     setFMSScoresheetData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  // Automatically calculate totalScore based on all "Final" score fields
   useEffect(() => {
-    const finalFields = [
-      "deepSquatFinal",
-      "hurdleStepFinal",
-      "inlineLungeFinal",
-      "shoulderMobilityFinal",
-      "activeStraightLegRaiseFinal",
-      "trunkStabilityPushUpFinal",
-      "rotaryStabilityFinal",
-    ];
-
-    // Calculates the total score of the FMS
+    // Define which raw score fields belong to each test
+    const scoreGroups = {
+      deepSquatFinal: ["deepSquat"],
+      hurdleStepFinal: ["leftHurdleStep", "rightHurdleStep"],
+      inlineLungeFinal: ["leftInlineLunge", "rightInlineLunge"],
+      shoulderMobilityFinal: ["leftShoulderMobility", "rightShoulderMobility"],
+      activeStraightLegRaiseFinal: ["leftActiveStraightLegRaise", "rightActiveStraightLegRaise"],
+      trunkStabilityPushUpFinal: ["trunkStabilityPushUp"],
+      rotaryStabilityFinal: ["leftRotaryStability", "rightRotaryStability"],
+    };
+  
+    // Compute lowest (final) score for each test
+    const updatedFinals = {};
+    for (const [finalField, rawFields] of Object.entries(scoreGroups)) {
+      const rawValues = rawFields
+        .map((field) => parseFloat(fmsScoresheetData[field]))
+        .filter((val) => !isNaN(val)); // Ignore blanks
+  
+      updatedFinals[finalField] = rawValues.length ? Math.min(...rawValues) : "";
+    }
+  
+    // Compute total FMS score (sum of all final scores)
+    const finalFields = Object.keys(scoreGroups);
     const total = finalFields.reduce((sum, field) => {
-      // Get the current field's value from the form data object; parseFloat turns a string ("3") into a number (3)
-      const testValue = parseFloat(fmsScoresheetData[field]);
-
-      // If the value is not a number (e.g., empty or invalid), treat it as 0
-      // Otherwise, add its numeric value to the running total
-      return sum + (isNaN(testValue) ? 0 : testValue);
-    }, 0); // Start the total (accumulator) at 0
-
+      const val = parseFloat(updatedFinals[field] ?? fmsScoresheetData[field]);
+      return sum + (isNaN(val) ? 0 : val);
+    }, 0);
+  
+    // Update all at once
     setFMSScoresheetData((prev) => ({
       ...prev,
+      ...updatedFinals,
       totalScore: total,
     }));
   }, [
-    fmsScoresheetData.deepSquatFinal,
-    fmsScoresheetData.hurdleStepFinal,
-    fmsScoresheetData.inlineLungeFinal,
-    fmsScoresheetData.shoulderMobilityFinal,
-    fmsScoresheetData.activeStraightLegRaiseFinal,
-    fmsScoresheetData.trunkStabilityPushUpFinal,
-    fmsScoresheetData.rotaryStabilityFinal,
+    fmsScoresheetData.deepSquat,
+    fmsScoresheetData.leftHurdleStep,
+    fmsScoresheetData.rightHurdleStep,
+    fmsScoresheetData.leftInlineLunge,
+    fmsScoresheetData.rightInlineLunge,
+    fmsScoresheetData.leftShoulderMobility,
+    fmsScoresheetData.rightShoulderMobility,
+    fmsScoresheetData.leftActiveStraightLegRaise,
+    fmsScoresheetData.rightActiveStraightLegRaise,
+    fmsScoresheetData.trunkStabilityPushUp,
+    fmsScoresheetData.leftRotaryStability,
+    fmsScoresheetData.rightRotaryStability,
   ]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
