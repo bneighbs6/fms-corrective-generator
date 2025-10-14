@@ -5,6 +5,12 @@ import "./newFMSCard.css"; // All extra styling not from Bootstrap is here
 
 function NewFMSCard() {
   const navigate = useNavigate(); 
+
+  // e is an event object
+  const handleClick = (e) => {
+    console.log(e);
+    navigate("/new-fms")
+  }
     // This will be placed on the home page as an option for the user -> it will bring the user to a new page with an FMS Score Sheet
     return (
       <div className="container">
@@ -12,7 +18,7 @@ function NewFMSCard() {
           <Card.Body>
             <Card.Title>New FMS Score Sheet</Card.Title>
             <Card.Text>This is for a new FMS with a client you haven't seen before</Card.Text>
-            <Button onClick={() => navigate("/new-fms")}>Go to New Web Page with FMS Scoresheet</Button>
+            <Button onClick={handleClick}>Go to New Web Page with FMS Scoresheet</Button>
           </Card.Body>
         </Card>
       </div>
