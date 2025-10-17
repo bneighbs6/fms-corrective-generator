@@ -268,7 +268,7 @@ function FMSScoresheet() {
                       onChange={handleFormChange}
                     />
                   </td>
-                  <td></td>{" "}
+                  <td></td>
                   {/* Intentionally Left Blank. Leaves a space b/w score and comments */}
                   <td>
                     <Form.Control type="text" placeholder="Comments" />
@@ -346,7 +346,7 @@ function FMSScoresheet() {
                       onChange={handleFormChange}
                     />
                   </td>
-                  <td></td>{" "}
+                  <td></td>
                   {/* Intentionally Left Blank. Leaves a space b/w score and comments */}
                   <td>
                     <Form.Control type="text" placeholder="Comments" />
@@ -398,7 +398,7 @@ function FMSScoresheet() {
                       onChange={handleFormChange}
                     />
                   </td>
-                  <td></td>{" "}
+                  <td></td>
                   {/* Intentionally Left Blank. Leaves a space b/w score and comments */}
                   <td>
                     <Form.Control type="text" placeholder="Comments" />
